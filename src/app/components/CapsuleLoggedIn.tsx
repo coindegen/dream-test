@@ -47,16 +47,6 @@ export const CapsuleSignEvmMessages: React.FC<CapsuleSignEvmMessagesProps> = ({
   handleSignMessage,
 }) => (
   <>
-    <CardHeader>
-      <h2 className="text-xl font-bold">
-        Capsule SDK: Message Signing Tutorial
-      </h2>
-      <p className="text-sm text-muted-foreground">
-        Learn how to use Capsule SDK to sign messages with various Ethereum
-        libraries. This tutorial demonstrates Capsule&apos;s integration with
-        popular signing libraries.
-      </p>
-    </CardHeader>
     <CardContent className="flex flex-grow overflow-auto flex-col items-start">
       <Alert className="break-words mb-4">
         <strong>Capsule Wallet ID:</strong> {walletId || "Not available"}
