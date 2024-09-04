@@ -16,6 +16,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@usecapsule/react-sdk": "^3.19.0",
+    "@usecapsule/viem-v2-integration": "^1.22.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "input-otp": "^1.2.4",
@@ -23,7 +24,8 @@
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.5.2"
+    "tailwind-merge": "^2.5.2",
+    "viem": "^2.21.1"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 import Capsule, {
   CapsuleModal,
   ConstructorOpts,
@@ -12,11 +14,12 @@ import "@usecapsule/react-sdk/styles.css";
 
 import Image from "next/image";
 
-// import { signEvmMessage } from "./CapsuleSigningExamples";
 // import { CapsuleModalExampleWrapper } from "./CapsuleModalExampleWrapper";
 
 import { useToast } from "./core/toast/use-toast";
 import { Button } from "./core";
+import { signEvmMessage } from "./CapsuleSigningExamples";
+import { CapsuleLoggedIn } from "./CapsuleLoggedIn";
 
 const FOREGROUND_COLOR = "#87CEEB";
 const BACKGROUND_COLOR = "#ffffff";
@@ -24,8 +27,8 @@ const BACKGROUND_COLOR = "#ffffff";
 // Step 1: Set up your Capsule API key
 // Obtain your API key from https://usecapsule.com/beta
 // const CAPSULE_API_KEY = "d0b61c2c8865aaa2fb12886651627271";
-console.log("CAPSULE_API_KEY", process.env.CAPSULE_API_KEY);
-const CAPSULE_API_KEY = process.env.CAPSULE_API_KEY;
+const CAPSULE_API_KEY = process.env.NEXT_PUBLIC_CAPSULE_API_KEY;
+console.log("CAPSULE_API_KEY", CAPSULE_API_KEY);
 
 // Step 2: Set the Capsule environment
 // Choose between Environment.DEVELOPMENT or Environment.PRODUCTION based on your use case
@@ -61,8 +64,12 @@ export const CapsuleComponent: FC<{}> = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const router = useRouter();
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState<boolean>(false);
   const [isCapsuleModalOpen, setIsCapsuleModalOpen] = useState<boolean>(false);
+
+  const [userRecoverySecret] = useState<string>("");
 
   const [message, setMessage] = useState<string>("");
 
@@ -124,43 +131,45 @@ export const CapsuleComponent: FC<{}> = () => {
   // todo: uncomment
   // Step 9: Handle message signing
   // This function demonstrates how to sign a message using Capsule
-  // const handleSignMessage = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     const signature = await signEvmMessage(
-  //       capsuleClient,
-  //       selectedSigner,
-  //       message
-  //     );
-  //     setSignature(signature);
-  //     toast({
-  //       title: "Capsule Message Signed",
-  //       description: "Message has been signed successfully using Capsule.",
-  //       duration: 3000,
-  //     });
-  //   } catch (error) {
-  //     console.error("Capsule message signing failed:", error);
-  //     toast({
-  //       title: "Capsule Signing Error",
-  //       description:
-  //         "Failed to sign message with Capsule. See console for details.",
-  //       duration: 3000,
-  //       variant: "destructive",
-  //     });
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+  const handleSignMessage = async () => {
+    setIsLoading(true);
+    try {
+      const signature = await signEvmMessage(
+        capsuleClient,
+        selectedSigner,
+        message
+      );
+      setSignature(signature);
+      toast({
+        title: "Capsule Message Signed",
+        description: "Message has been signed successfully using Capsule.",
+        duration: 3000,
+      });
+    } catch (error) {
+      console.error("Capsule message signing failed:", error);
+      toast({
+        title: "Capsule Signing Error",
+        description:
+          "Failed to sign message with Capsule. See console for details.",
+        duration: 3000,
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Step 10: Handle user logout
   // This function demonstrates how to log out a user from Capsule
   const handleLogout = async () => {
     await capsuleClient.logout();
     toast({
-      title: "Capsule Logout",
-      description: "You have been successfully logged out from Capsule.",
+      title: "Dream Logout",
+      description: "You have been successfully logged out from DreamOS.",
     });
+    router.push("/");
     resetState();
+    // router.refresh();
   };
 
   // Helper function to reset the component state
@@ -171,7 +180,20 @@ export const CapsuleComponent: FC<{}> = () => {
 
   // Render the appropriate component based on the authentication state
   return isUserLoggedIn ? (
-    <div>User is logged in</div>
+    <CapsuleLoggedIn
+      isLoading={isLoading}
+      signature={signature}
+      walletId={walletId}
+      walletAddress={walletAddress}
+      userRecoverySecret={userRecoverySecret}
+      message={message}
+      selectedSigner={selectedSigner}
+      isUserLoggedIn={isUserLoggedIn}
+      setSelectedSigner={setSelectedSigner}
+      setMessage={(e: any) => setMessage(e.target.value)}
+      handleLogout={handleLogout}
+      handleSignMessage={handleSignMessage}
+    />
   ) : (
     // <CapsuleSignEvmMessages isLoading={isLoading}
     //   signature={signature}
