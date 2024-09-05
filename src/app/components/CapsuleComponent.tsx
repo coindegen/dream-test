@@ -33,7 +33,7 @@ const CAPSULE_ENVIRONMENT = Environment.DEVELOPMENT;
 // For a full list of constructor options, visit:
 // https://docs.usecapsule.com/integration-guide/customize-capsule#constructor-options
 const constructorOpts: ConstructorOpts = {
-  emailPrimaryColor: "##87CEEB",
+  emailPrimaryColor: FOREGROUND_COLOR,
   githubUrl: "",
   linkedinUrl: "",
   xUrl: "https://x.com/theDreamOS",

@@ -1,4 +1,7 @@
+import Link from "next/link";
+import Image from "next/image";
 import { CapsuleComponent } from "./components/CapsuleComponent";
+import { CapsuleCustom } from "./components/CapsuleCustom";
 
 export default function Home() {
   return (
@@ -10,11 +13,26 @@ export default function Home() {
       </div>
 
       {/* <CapsuleComponent /> */}
+      {/* <WelcomeLogo /> */}
+
       <CapsuleCustom />
 
       {/* <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <div>Footer</div>
       </div> */}
     </main>
+  );
+}
+
+function WelcomeLogo() {
+  return (
+    <Link href="/login" className="w-full sm:w-auto text-sm">
+      <Image
+        src="https://www.dreamos.app/img/icon/welcome.svg"
+        alt="DreamOS logo"
+        width={128}
+        height={128}
+      />
+    </Link>
   );
 }
