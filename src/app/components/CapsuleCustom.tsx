@@ -54,7 +54,7 @@ const capsuleClient = new Capsule(
 );
 
 // Main component for Capsule Modal based authentication and message signing tutorial
-export const CapsuleComponent: FC<{}> = () => {
+export const CapsuleCustom: FC<{}> = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 

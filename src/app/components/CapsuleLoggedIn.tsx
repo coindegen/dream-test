@@ -68,7 +68,7 @@ export const CapsuleLoggedIn: React.FC<CapsuleSignEvmMessagesProps> = ({
         onClick={handleLogout}
         className="w-full sm:w-auto text-sm"
       >
-        Logout from Capsule
+        Logout from Dream
       </Button>
     </CardFooter>
     <Toaster />
