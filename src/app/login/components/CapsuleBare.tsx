@@ -28,8 +28,8 @@ const CAPSULE_ENVIRONMENT = Environment.DEVELOPMENT;
 // https://docs.usecapsule.com/integration-guide/customize-capsule#constructor-options
 const constructorOpts: ConstructorOpts = {
   emailPrimaryColor: FOREGROUND_COLOR,
-  githubUrl: "",
-  linkedinUrl: "",
+  githubUrl: "https://github.com/theDreamOS",
+  linkedinUrl: "https://www.linkedin.com/company/the-dream-os/",
   xUrl: "https://x.com/theDreamOS",
   homepageUrl: "https://dreamos.app",
   supportUrl: "",
@@ -72,6 +72,8 @@ export const CapsuleBare: FC<{}> = () => {
   const checkLoginStatus = useCallback(async () => {
     try {
       const isLoggedIn = await capsuleClient.isFullyLoggedIn();
+
+      console.log({ isLoggedIn });
 
       if (isLoggedIn) {
         const wallets = capsuleClient.getWallets();

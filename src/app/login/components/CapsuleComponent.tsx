@@ -34,8 +34,8 @@ const CAPSULE_ENVIRONMENT = Environment.DEVELOPMENT;
 // https://docs.usecapsule.com/integration-guide/customize-capsule#constructor-options
 const constructorOpts: ConstructorOpts = {
   emailPrimaryColor: FOREGROUND_COLOR,
-  githubUrl: "",
-  linkedinUrl: "",
+  githubUrl: "https://github.com/theDreamOS",
+  linkedinUrl: "https://www.linkedin.com/company/the-dream-os/",
   xUrl: "https://x.com/theDreamOS",
   homepageUrl: "https://dreamos.app",
   supportUrl: "",
@@ -50,7 +50,7 @@ const constructorOpts: ConstructorOpts = {
 const capsuleClient = new Capsule(
   CAPSULE_ENVIRONMENT,
   CAPSULE_API_KEY,
-  constructorOpts
+  constructorOpts,
 );
 
 // Main component for Capsule Modal based authentication and message signing tutorial
@@ -131,7 +131,7 @@ export const CapsuleComponent: FC<{}> = () => {
       const signature = await signEvmMessage(
         capsuleClient,
         selectedSigner,
-        message
+        message,
       );
       setSignature(signature);
       toast({
