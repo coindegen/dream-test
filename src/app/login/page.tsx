@@ -10,7 +10,7 @@ export default function Login() {
           </div>
           <div className="text-3xl font-semibold text-black">the Dream</div>
         </div>
-        <CapsuleBare />;
+        <CapsuleBare />
       </div>
     </main>
   );

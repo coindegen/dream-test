@@ -12,10 +12,6 @@ import Capsule, {
 import { type FC, useCallback, useEffect, useState } from "react";
 import "@usecapsule/react-sdk/styles.css";
 
-import Image from "next/image";
-
-// import { CapsuleModalExampleWrapper } from "./CapsuleModalExampleWrapper";
-
 import { useToast } from "./core/toast/use-toast";
 import { Button } from "./core";
 import { signEvmMessage } from "./CapsuleSigningExamples";

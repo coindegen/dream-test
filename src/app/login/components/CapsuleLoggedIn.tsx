@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   CardHeader,
   CardContent,
@@ -46,31 +46,31 @@ export const CapsuleLoggedIn: React.FC<CapsuleSignEvmMessagesProps> = ({
   handleLogout,
   handleSignMessage,
 }) => (
-  <>
-    <CardContent className="flex flex-grow overflow-auto flex-col items-start">
-      <Alert className="break-words mb-4">
+  <Fragment>
+    <CardContent className="flex flex-grow flex-col items-center justify-center overflow-auto">
+      <Alert className="mb-4 break-words">
         <strong>Capsule Wallet ID:</strong> {walletId || "Not available"}
       </Alert>
-      <Alert className="break-words mb-4">
+      <Alert className="mb-4 break-words">
         <strong>Capsule Wallet Address:</strong>{" "}
         {walletAddress || "Not available"}
       </Alert>
       {userRecoverySecret && (
-        <Alert className="break-words mb-4">
+        <Alert className="mb-4 break-words">
           <strong>Capsule Recovery Secret:</strong>{" "}
           {userRecoverySecret || "Not available"}
         </Alert>
       )}
     </CardContent>
-    <CardFooter className="flex flex-col sm:flex-row justify-between gap-2 p-4">
+    <CardFooter className="flex flex-col justify-between gap-2 p-4 sm:flex-row">
       <Button
         variant="outline"
         onClick={handleLogout}
-        className="w-full sm:w-auto text-sm"
+        className="w-full text-sm sm:w-auto"
       >
         Logout from Dream
       </Button>
     </CardFooter>
     <Toaster />
-  </>
+  </Fragment>
 );
