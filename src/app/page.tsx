@@ -11,9 +11,9 @@ export default function Home() {
           Welcome to the Dream
         </p>
       </div>
-      <CapsuleComponent />
+      {/* <CapsuleComponent /> */}
       {/* <WelcomeLogo /> */}
-      {/* <CapsuleCustom /> */}
+      <CapsuleCustom />
       {/* <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <div>Footer</div>
       </div> */}
