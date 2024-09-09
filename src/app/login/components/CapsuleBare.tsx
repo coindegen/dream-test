@@ -1,8 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { GeistSans } from "geist/font/sans";
-
 import Capsule, {
   CapsuleModal,
   ConstructorOpts,
@@ -11,19 +8,12 @@ import Capsule, {
   OAuthMethod,
   WalletType,
 } from "@usecapsule/react-sdk";
-import { type FC, useCallback, useEffect, useState } from "react";
 import "@usecapsule/react-sdk/styles.css";
-
-import { DreamLogo } from "@/app/assets/logo";
-
-import Image from "next/image";
-
-// import { CapsuleModalExampleWrapper } from "./CapsuleModalExampleWrapper";
-
-import { useToast } from "./core/toast/use-toast";
-import { Button } from "./core";
-import { signEvmMessage } from "./CapsuleSigningExamples";
+import { useRouter } from "next/navigation";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { CapsuleLoggedIn } from "./CapsuleLoggedIn";
+import { signEvmMessage } from "./CapsuleSigningExamples";
+import { useToast } from "./core/toast/use-toast";
 
 const FOREGROUND_COLOR = "#87CEEB";
 const BACKGROUND_COLOR = "#ffffff";
@@ -201,13 +191,13 @@ export const CapsuleBare: FC<{}> = () => {
           oAuthLogoVariant: "dark",
         }}
         capsule={capsuleClient}
-        // networks={[
-        //   Network.ETHEREUM,
-        //   Network.ARBITRUM,
-        //   Network.BASE,
-        //   Network.OPTIMISM,
-        //   Network.POLYGON,
-        // ]}
+        networks={[
+          Network.ETHEREUM,
+          Network.ARBITRUM,
+          Network.BASE,
+          Network.OPTIMISM,
+          Network.POLYGON,
+        ]}
         isOpen={true}
         onClose={handleModalClose}
         appName="DreamOS Test Task"

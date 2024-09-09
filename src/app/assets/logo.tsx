@@ -1,10 +1,17 @@
 import { FC, SVGProps } from "react";
 
-export const DreamLogo: FC<SVGProps<SVGSVGElement>> = (props) => (
+interface DreamLogoProps {
+  width?: number | string;
+  height?: number | string;
+}
+
+export const DreamLogo: FC<SVGProps<SVGSVGElement> & DreamLogoProps> = (
+  props,
+) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="52"
-    height="56"
+    width={props.width ?? 52}
+    height={props.height ?? 56}
     viewBox="0 0 52 56"
     fill="none"
     {...props}

@@ -61,9 +61,10 @@ const config: Config = {
         mono: ["var(--font-geist-mono)"],
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        xl: "calc(var(--radius) + 0.5rem)",
+        lg: "calc(var(--radius) + 0.25rem)",
+        md: "var(--radius)",
+        sm: "calc(var(--radius) - 0.25rem)",
       },
     },
   },
