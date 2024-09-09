@@ -1,37 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import Capsule, {
   CapsuleModal,
   ConstructorOpts,
   Environment,
+  Network,
   OAuthMethod,
   WalletType,
 } from "@usecapsule/react-sdk";
-import { type FC, useCallback, useEffect, useState } from "react";
 import "@usecapsule/react-sdk/styles.css";
-
-import Image from "next/image";
-
-// import { CapsuleModalExampleWrapper } from "./CapsuleModalExampleWrapper";
-
-import { useToast } from "./core/toast/use-toast";
-import { Button } from "./core";
-import { signEvmMessage } from "./CapsuleSigningExamples";
+import { useRouter } from "next/navigation";
+import { type FC, useCallback, useEffect, useState } from "react";
 import { CapsuleLoggedIn } from "./CapsuleLoggedIn";
+import { signEvmMessage } from "./CapsuleSigningExamples";
+import { useToast } from "./core/toast/use-toast";
 
 const FOREGROUND_COLOR = "#87CEEB";
 const BACKGROUND_COLOR = "#ffffff";
 
-// Step 1: Set up your Capsule API key
-// Obtain your API key from https://usecapsule.com/beta
-// const CAPSULE_API_KEY = "d0b61c2c8865aaa2fb12886651627271";
 const CAPSULE_API_KEY = process.env.NEXT_PUBLIC_CAPSULE_API_KEY;
-console.log("CAPSULE_API_KEY", CAPSULE_API_KEY);
 
-// Step 2: Set the Capsule environment
-// Choose between Environment.DEVELOPMENT or Environment.PRODUCTION based on your use case
 const CAPSULE_ENVIRONMENT = Environment.DEVELOPMENT;
 
 // Step 3: (Optional) Customize the Capsule SDK integration
@@ -39,9 +27,7 @@ const CAPSULE_ENVIRONMENT = Environment.DEVELOPMENT;
 // For a full list of constructor options, visit:
 // https://docs.usecapsule.com/integration-guide/customize-capsule#constructor-options
 const constructorOpts: ConstructorOpts = {
-  emailPrimaryColor: "##87CEEB",
-  githubUrl: "",
-  linkedinUrl: "",
+  emailPrimaryColor: FOREGROUND_COLOR,
   xUrl: "https://x.com/theDreamOS",
   homepageUrl: "https://dreamos.app",
   supportUrl: "",
@@ -56,11 +42,10 @@ const constructorOpts: ConstructorOpts = {
 const capsuleClient = new Capsule(
   CAPSULE_ENVIRONMENT,
   CAPSULE_API_KEY,
-  constructorOpts
+  constructorOpts,
 );
 
-// Main component for Capsule Modal based authentication and message signing tutorial
-export const CapsuleComponent: FC<{}> = () => {
+export const CapsuleBare: FC<{}> = () => {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -85,6 +70,8 @@ export const CapsuleComponent: FC<{}> = () => {
   const checkLoginStatus = useCallback(async () => {
     try {
       const isLoggedIn = await capsuleClient.isFullyLoggedIn();
+
+      console.log({ isLoggedIn });
 
       if (isLoggedIn) {
         const wallets = capsuleClient.getWallets();
@@ -137,7 +124,7 @@ export const CapsuleComponent: FC<{}> = () => {
       const signature = await signEvmMessage(
         capsuleClient,
         selectedSigner,
-        message
+        message,
       );
       setSignature(signature);
       toast({
@@ -159,8 +146,7 @@ export const CapsuleComponent: FC<{}> = () => {
     }
   };
 
-  // Step 10: Handle user logout
-  // This function demonstrates how to log out a user from Capsule
+  // todo: make sure this resets the UI
   const handleLogout = async () => {
     await capsuleClient.logout();
     toast({
@@ -195,38 +181,24 @@ export const CapsuleComponent: FC<{}> = () => {
       handleSignMessage={handleSignMessage}
     />
   ) : (
-    // <CapsuleSignEvmMessages isLoading={isLoading}
-    //   signature={signature}
-    //   walletId={walletId}
-    //   walletAddress={walletAddress}
-    //   userRecoverySecret={userRecoverySecret}
-    //   message={message}
-    //   selectedSigner={selectedSigner}
-    //   isUserLoggedIn={isUserLoggedIn}
-    //   setSelectedSigner={setSelectedSigner}
-    //   setMessage={(e: any) => setMessage(e.target.value)}
-    //   handleLogout={handleLogout}
-    //   handleSignMessage={() => {}}
-    // />
     <>
-      <Button onClick={handleModalOpen} className="w-full sm:w-auto text-sm">
-        <Image
-          src="https://www.dreamos.app/img/icon/welcome.svg"
-          alt="DreamOS logo"
-          width={128}
-          height={128}
-        />
-      </Button>
-
       <CapsuleModal
-        logo="https://www.dreamos.app/img/icon/welcome.svg"
+        bareModal={true}
+        logo={"/dream_logo.svg"}
         theme={{
           backgroundColor,
           foregroundColor,
           oAuthLogoVariant: "dark",
         }}
         capsule={capsuleClient}
-        isOpen={isCapsuleModalOpen}
+        networks={[
+          Network.ETHEREUM,
+          Network.ARBITRUM,
+          Network.BASE,
+          Network.OPTIMISM,
+          Network.POLYGON,
+        ]}
+        isOpen={true}
         onClose={handleModalClose}
         appName="DreamOS Test Task"
         oAuthMethods={[
@@ -250,6 +222,16 @@ export const CapsuleComponent: FC<{}> = () => {
           ],
           testMode: true,
         }}
+        onModalStepChange={(val) => {
+          console.log("modal step change", val);
+        }}
+        onExpandModalChange={(val) => {
+          console.log("modal expand change", val);
+        }}
+        // createWalletOverride={async (capsule) => {
+        //   console.log("overriding wallet", capsule);
+        //   return { walletIds: ["123"] };
+        // }}
       />
     </>
   );
