@@ -232,12 +232,12 @@ export const CapsuleBare: FC<{}> = () => {
           ],
           testMode: true,
         }}
-        // onModalStepChange={(val) => {
-        //   console.log("modal step change", val);
-        // }}
-        // onExpandModalChange={(val) => {
-        //   console.log("modal expand change", val);
-        // }}
+        onModalStepChange={(val) => {
+          console.log("modal step change", val);
+        }}
+        onExpandModalChange={(val) => {
+          console.log("modal expand change", val);
+        }}
         // createWalletOverride={async (capsule) => {
         //   console.log("overriding wallet", capsule);
         //   return { walletIds: ["123"] };

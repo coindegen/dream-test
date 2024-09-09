@@ -1,11 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { CapsuleComponent } from "./login/components/CapsuleComponent";
-import { CapsuleCustom } from "./login/components/CapsuleCustom";
-import { CapsuleBare } from "./login/components/CapsuleBare";
+import { useState } from "react";
 import { DreamLogo } from "./assets/logo";
 
 export default function Home() {

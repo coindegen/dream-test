@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { CapsuleBare } from "./components/CapsuleBare";
 
 export default function Login() {
