@@ -202,16 +202,17 @@ export const CapsuleComponent: FC<{}> = () => {
     //   handleSignMessage={() => {}}
     // />
     <>
-      <Button onClick={handleModalOpen} className="w-full sm:w-auto text-sm">
+      {/* <Button onClick={handleModalOpen} className="w-full sm:w-auto text-sm">
         <Image
           src="https://www.dreamos.app/img/icon/welcome.svg"
           alt="DreamOS logo"
           width={128}
           height={128}
         />
-      </Button>
+      </Button> */}
 
       <CapsuleModal
+        bareModal={true}
         logo="https://www.dreamos.app/img/icon/welcome.svg"
         theme={{
           backgroundColor,
